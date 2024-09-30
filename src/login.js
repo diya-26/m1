@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom'; // Import Link here
 import { TextField, Button, Container, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
-import './login.css'; 
+import './login.css';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // Use navigate hook
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+    // Handle login logic here
     console.log('Login:', { email, password });
+    
+    // Redirect to landing page after login
+    navigate('/landing');
   };
 
   return (
-    <Container maxWidth="sm" className="c1">
+    <Container maxWidth="sm" className="container">
       <Typography variant="h4">Login</Typography>
       <form onSubmit={handleLogin}>
         <TextField
