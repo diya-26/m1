@@ -1,72 +1,49 @@
-
 .landing-page {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: #f8f9fa;
+    justify-content: space-between;
+    height: 100vh;
 }
 
-
-.navbar {
-    background-color: #1976d2;
-    
+/* Top Navbar */
+.top-navbar {
+    background-color: #00796b;
+    color: white;
+    text-align: center;
 }
 
 .navbar-title {
     flex-grow: 1;
+    text-align: center;
 }
 
-.nav-links button {
-    margin-left: 20px;
-}
-
+/* Welcome Section */
 .welcome-section {
-    text-align: center;
-    margin-top: 50px;
-    padding: 50px 20px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    max-width: 800px;
-    margin: 50px auto;
-}
-
-.welcome-section h3 {
-    margin-bottom: 20px;
-}
-
-.welcome-section p {
-    margin-bottom: 30px;
-}
-
-.features-section {
-    margin: 50px 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
-.features-section h4 {
-    margin-bottom: 30px;
+/* Bottom Navbar */
+.bottom-navbar {
+    background-color: #00796b;
+    display: flex;
+    justify-content: space-around;
 }
 
-.features-section ul {
-    list-style-type: none;
-    padding-left: 0;
+.nav-links {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    /* Adds equal space between icons */
 }
 
-.features-section ul li {
-    margin: 15px 0;
-    font-size: 1.2em;
-    color: #555;
-}
-
-
-@media (max-width: 600px) {
-    .welcome-section {
-        padding: 20px;
-        margin: 20px;
-    }
-
-    .features-section {
-        margin: 20px;
-    }
+.nav-button {
+    flex-grow: 1;
+    /* Ensures buttons take equal width */
+    padding: 10px;
+    text-align: center;
 }

@@ -1,58 +1,79 @@
-import React from 'react';
-import { AppBar, Toolbar, Button, Container, Typography } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { AppBar, Toolbar, Button, Typography, Snackbar } from '@mui/material';
 import { Link } from 'react-router-dom';
-import './landing.css'; 
+import GroupIcon from '@mui/icons-material/Group'; // For Groups
+import EmojiPeopleIcon from '@mui/icons-material/EmojiPeople'; // For Friends
+import ListAltIcon from '@mui/icons-material/ListAlt'; // For Activity
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'; // For Profile
+import AddIcon from '@mui/icons-material/Add'; // For Adding Expenses
+import './landing.css';
 
 const LandingPage = () => {
+  const [open, setOpen] = useState(true); // State for Snackbar visibility
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpen(false);
+  };
+
+  // Automatically close the Snackbar after 10 seconds
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpen(false);
+    }, 10000); // 10 seconds
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div className="landing-page">
       
-      <AppBar position="static" className="navbar">
-        <Toolbar>
-          <Typography variant="h6" className="navbar-title">
-            ABCname
-          </Typography>
-          <div className="nav-links">
-            <Button color="inherit" component={Link} to="/dashboard">
-              Dashboard
-            </Button>
-            <Button color="inherit" component={Link} to="/profile">
-              Profile
-            </Button>
-            <Button color="inherit" component={Link} to="/logout">
-              Logout
-            </Button>
-          </div>
-        </Toolbar>
-      </AppBar>
+      {/* Top Navbar for Snackbar */}
+      <Snackbar
+        open={open}
+        autoHideDuration={10000} // Auto hide after 10 seconds
+        onClose={handleClose}
+        message="Hi, welcome to TrackSplit"
+        anchorOrigin={{ vertical: 'top', horizontal: 'center' }} // Positioning
+      />
 
-      
-      <Container className="welcome-section">
-        <Typography variant="h3" gutterBottom>
-          Welcome !
+      {/* Main Content (Centered Add Friends Message) */}
+      <div className="welcome-section">
+        <Typography variant="h4" gutterBottom>
+          You have not added any friends yet!
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Manage your expenses and keep track of who owes you. Start sharing your expenses with friends and family!
+          Start by inviting friends to share your expenses and balances.
         </Typography>
-        <Button variant="contained" color="primary" component={Link} to="/dashboard">
-          Go to Dashboard
+        <Button variant="contained" color="primary" component={Link} to="/add-friend">
+          Add Friends
         </Button>
-      </Container>
+      </div>
 
-    
-      <Container className="features-section">
-        <Typography variant="h4" gutterBottom>
-          Features
-        </Typography>
-        <Typography variant="body1">
-          <ul>
-            <li>Track shared expenses easily.</li>
-            <li>Keep balances in sync with friends and family.</li>
-            <li>Split bills equally or by custom amounts.</li>
-            <li>Detailed expense reports and history.</li>
-          </ul>
-        </Typography>
-      </Container>
+      {/* Bottom Navbar with Icons */}
+      <AppBar position="fixed" className="bottom-navbar" style={{ top: 'auto', bottom: 0 }}>
+        <Toolbar className="nav-links">
+          <Button color="inherit" component={Link} to="/friends" className="nav-button">
+            <EmojiPeopleIcon />
+          </Button>
+          <Button color="inherit" component={Link} to="/groups" className="nav-button">
+            <GroupIcon />
+          </Button>
+          <Button color="inherit" component={Link} to="/add-expense" className="nav-button">
+            <AddIcon /> {/* "+" Icon for Adding Expenses */}
+          </Button>
+          <Button color="inherit" component={Link} to="/activity" className="nav-button">
+            <ListAltIcon />
+          </Button>
+          <Button color="inherit" component={Link} to="/profile" className="nav-button">
+            <AccountCircleIcon />
+          </Button>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 };
